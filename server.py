@@ -9,6 +9,25 @@ app = Flask(__name__)
 def index():
     return render_template("home.html")
 
+@app.route("/detect", methods=["POST"])
+def detect():
+    try:
+        if request.method == "POST":
+            f = request.files["file"]
+
+            filename = secure_filename(f.filename)
+
+            # 외부에서 온 이미지, 파일 등을
+            # 마음대로 저장할 수 없음
+            
+            f.save("static/" + filename)
+            r = label("static/" + filename)
+            return r
+            # 서버에 클라이언트가 보낸 이미지를 저장!!
+            
+    except:
+        return "감지 실패"
+    
 @app.route("/compare", methods=["POST"])
 def compare():
     try:
