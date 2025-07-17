@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask import request, redirect, make_response
-from aws2 import compare_faces
+from aws import compare_faces
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
